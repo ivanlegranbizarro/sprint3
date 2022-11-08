@@ -1,12 +1,12 @@
 /* El codi ha de llegir un fitxer situat en un directori inbox i escriu el seu contingut invertit en un altre fitxer al directori outbox. 
 Reestructura i simplifiqui el codi existent per a evitar el denominat Callback Hell. */
 
-
 const {
   readdirSync,
   readFileSync,
   writeFileSync
 } = require( "fs" );
+
 const {
   join
 } = require( "path" );
