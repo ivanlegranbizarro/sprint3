@@ -36,7 +36,7 @@ const fs = require( 'fs' );
 const path = require( 'path' );
 params = JSON.parse( fs.readFileSync( path.join( __dirname, 'params.json' ), 'utf8' ) );
 
-class Maths {
+class Calculadora {
   add ( { a = params.a, b = params.b } ) {
     return parseInt( a + b );
   }
@@ -50,7 +50,7 @@ class Maths {
 
 
 
-const calculator = new Maths();
+const calculator = new Calculadora();
 
 console.log( calculator.add( {} ) );
 console.log( typeof ( calculator.add( {} ) ) );
