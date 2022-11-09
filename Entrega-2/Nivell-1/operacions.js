@@ -9,8 +9,6 @@ const sum = ( req, res, next ) => {
   next();
 };
 
-console.log( 'Suma:' );
-sum( { params: { values: '{"a": 2, "b": 3}' } }, {}, () => { } );
 
 const rest = ( req, res, next ) => {
   const { a, b } = JSON.parse( req.params.values );
@@ -19,9 +17,6 @@ const rest = ( req, res, next ) => {
   next();
 };
 
-console.log( 'Resta:' );
-rest( { params: { values: '{"a": 2, "b": 3}' } }, {}, () => { } );
-
 const multiply = ( req, res, next ) => {
   const { a, b } = JSON.parse( req.params.values );
   const result = a * b;
@@ -29,8 +24,6 @@ const multiply = ( req, res, next ) => {
   next();
 };
 
-console.log( 'Multiplicació:' );
-multiply( { params: { values: '{"a": 2, "b": 3}' } }, {}, () => { } );
 
 
 const divide = ( req, res, next ) => {
@@ -40,5 +33,11 @@ const divide = ( req, res, next ) => {
   next();
 };
 
-console.log( 'Divisió:' );
-divide( { params: { values: '{"a": 2, "b": 3}' } }, {}, () => { } );
+
+
+module.exports = {
+  sum,
+  rest,
+  multiply,
+  divide
+};
