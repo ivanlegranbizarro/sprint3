@@ -38,13 +38,13 @@ params = JSON.parse( fs.readFileSync( path.join( __dirname, 'params.json' ), 'ut
 
 class Maths {
   add ( { a = params.a, b = params.b } ) {
-    return parseInt( a ) + parseInt( b );
+    return parseInt( a + b );
   }
   subtract ( { a = params.a, b = params.b } ) {
-    return parseInt( a ) - parseInt( b );
+    return parseInt( a - b );
   }
   multiply ( { a = params.a, b = params.b } ) {
-    return parseInt( a ) * parseInt( b );
+    return parseInt( a * b );
   }
 }
 
@@ -73,7 +73,6 @@ app.use( ( req, next ) => {
   next();
 } );
 
-// la división entre 2 de todos los operandos (pasamos function de middleware)
 app.use( ( req, next ) => {
   req.a = req.a / 2;
   console.log( `a: ${ req.a }` );
@@ -87,4 +86,9 @@ app.use( ( req, next ) => {
 console.log( app.add( { a: 5, b: 10 } ) );
 console.log( app.subtract( { a: 10, b: 6 } ) );
 console.log( app.multiply( { a: 2, b: 3 } ) );
+
+console.log( app.add( {} ) );
+console.log( app.subtract( {} ) );
+console.log( app.multiply( {} ) );
+
 
