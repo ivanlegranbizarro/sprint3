@@ -17,7 +17,6 @@ class Decorator {
     const divisa = article.divisa;
     const divisaArticle = divisa + '_EUR';
     return divisaArticle;
-
   }
 
   convertiraEuros () {
