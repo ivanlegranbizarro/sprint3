@@ -1,23 +1,30 @@
 const amqp = require( 'amqplib/callback_api' );
 
-
-amqp.connect( 'amqp://localhost', ( error0, connection ) => {
-  if ( error0 ) {
-    throw error0;
+class Subscriber {
+  constructor ( queue ) {
+    this.queue = queue;
   }
-  connection.createChannel( ( error1, channel ) => {
-    if ( error1 ) {
-      throw error1;
-    }
-    let queue = 'hello';
 
-    channel.assertQueue( queue, {
-      durable: false
+  subscribe () {
+    amqp.connect( 'amqp://localhost', ( error0, connection ) => {
+      if ( error0 ) {
+        throw error0;
+      }
+      connection.createChannel( ( error1, channel ) => {
+        if ( error1 ) {
+          throw error1;
+        }
+        channel.assertQueue( this.queue, {
+          durable: false
+        } );
+        channel.consume( this.queue, ( msg ) => {
+          console.log( `Subscriber: Missatge rebut: ${ msg.content.toString() }` );
+        }, {
+          noAck: true
+        } );
+      } );
     } );
-    channel.consume( queue, ( msg ) => {
-      console.log( `Hola, estic llegint el missatge: ${ msg.content.toString() }` );
-    }, {
-      noAck: true
-    } );
-  } );
-} );
+  }
+}
+
+module.exports = Subscriber;
